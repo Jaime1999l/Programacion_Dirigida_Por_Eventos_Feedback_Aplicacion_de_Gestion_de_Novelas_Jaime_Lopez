@@ -12,7 +12,7 @@
 
         <!-- MainActivity: Necesita android:exported debido al intent-filter -->
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +24,11 @@
         <activity
             android:name=".ui.addeditnovel.AddEditNovelActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.review.ReviewActivity"
+            android:exported="false" />
+
 
     </application>
 

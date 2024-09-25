@@ -1,4 +1,4 @@
-package com.example.aplicacion_de_gestin_de_novelas.ui.main;
+package com.example.aplicacion_de_gestin_de_novelas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -6,15 +6,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.aplicacion_de_gestin_de_novelas.R;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
 import com.example.aplicacion_de_gestin_de_novelas.ui.addeditnovel.AddEditNovelActivity;
+import com.example.aplicacion_de_gestin_de_novelas.ui.main.NovelAdapter;
+import com.example.aplicacion_de_gestin_de_novelas.ui.main.NovelViewModel;
+import com.example.aplicacion_de_gestin_de_novelas.ui.review.ReviewActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -69,8 +74,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFavoriteClick(Novel novel) {
-                novelViewModel.update(new Novel(novel.getId(), novel.getTitle(), novel.getAuthor(), novel.getYear(), novel.getSynopsis(), !novel.isFavorite()));
+                novelViewModel.update(new Novel(novel.getTitle(), novel.getAuthor(), novel.getYear(), novel.getSynopsis()));
                 Toast.makeText(MainActivity.this, "Favorito actualizado", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDeleteClick(Novel novel) {
+                new MaterialAlertDialogBuilder(MainActivity.this)
+                        .setTitle("Eliminar Novela")
+                        .setMessage("¿Estás seguro de que deseas eliminar esta novela?")
+                        .setNegativeButton("Cancelar", null)
+                        .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                novelViewModel.delete(novel);
+                                Snackbar.make(recyclerView, "Novela eliminada", Snackbar.LENGTH_LONG).show();
+                            }
+                        }).show();
+            }
+
+            @Override
+            public void onReviewClick(Novel novel) {
+                Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+                intent.putExtra("EXTRA_NOVEL_ID", novel.getId());
+                startActivity(intent);
             }
         });
     }

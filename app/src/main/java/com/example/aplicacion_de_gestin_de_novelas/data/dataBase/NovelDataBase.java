@@ -1,4 +1,4 @@
-package com.example.aplicacion_de_gestin_de_novelas.data.database;
+package com.example.aplicacion_de_gestin_de_novelas.data.dataBase;
 
 import android.content.Context;
 
@@ -13,12 +13,12 @@ import com.example.aplicacion_de_gestin_de_novelas.data.model.Review;
 public abstract class NovelDataBase extends RoomDatabase {
     private static NovelDataBase instance;
 
-    public abstract NovelDao novelDao();
+    public abstract com.example.aplicacion_de_gestin_de_novelas.data.dataBase.NovelDao novelDao();
 
     public static synchronized NovelDataBase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                            NovelDatabase.class, "novel_database")
+                            NovelDataBase.class, "novel_database")
                     .fallbackToDestructiveMigration()
                     .build();
         }

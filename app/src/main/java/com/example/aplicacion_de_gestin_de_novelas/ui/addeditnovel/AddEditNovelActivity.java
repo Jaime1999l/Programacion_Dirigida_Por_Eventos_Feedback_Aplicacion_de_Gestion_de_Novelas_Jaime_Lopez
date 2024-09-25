@@ -74,5 +74,19 @@ public class AddEditNovelActivity extends AppCompatActivity {
             return;
         }
 
-        int year = Integer.parse
+        int year = Integer.parseInt(yearString);
+        Novel novel = new Novel(title, author, year, synopsis);
+
+        if (getIntent().hasExtra("EXTRA_ID")) {
+            novel.setId(getIntent().getIntExtra("EXTRA_ID", -1));
+            addEditNovelViewModel.saveNovel(novel);
+            Toast.makeText(this, "Novela actualizada", Toast.LENGTH_SHORT).show();
+        } else {
+            addEditNovelViewModel.saveNovel(novel);
+            Toast.makeText(this, "Novela agregada", Toast.LENGTH_SHORT).show();
+        }
+
+        finish();
+    }
+}
 

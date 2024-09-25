@@ -1,4 +1,4 @@
-package com.example.aplicacion_de_gestin_de_novelas.data.database;
+package com.example.aplicacion_de_gestin_de_novelas.data.dataBase;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -35,4 +35,3 @@ public interface NovelDao {
     @Query("SELECT * FROM review_table WHERE novelId = :novelId ORDER BY id DESC")
     LiveData<List<Review>> getReviewsForNovel(int novelId);
 }
-

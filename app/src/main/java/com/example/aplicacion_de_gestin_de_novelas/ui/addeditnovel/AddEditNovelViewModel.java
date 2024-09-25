@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Review;
-import com.example.aplicacion_de_gestin_de_novelas.data.repository.NovelRepository;
+import com.example.aplicacion_de_gestin_de_novelas.data.rep.NovelRepository;
 
 import java.util.List;
 

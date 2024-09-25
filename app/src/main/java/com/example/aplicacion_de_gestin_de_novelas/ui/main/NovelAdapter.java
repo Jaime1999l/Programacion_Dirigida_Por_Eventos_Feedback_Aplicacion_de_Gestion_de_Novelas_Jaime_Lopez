@@ -3,6 +3,7 @@ package com.example.aplicacion_de_gestin_de_novelas.ui.main;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -51,15 +52,17 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
     }
 
     class NovelHolder extends RecyclerView.ViewHolder {
-        private TextView textViewTitle;
-        private TextView textViewAuthor;
-        private ImageView imageFavorite;
+        private final TextView textViewTitle;
+        private final TextView textViewAuthor;
+        private final ImageView imageFavorite;
 
         public NovelHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewAuthor = itemView.findViewById(R.id.text_view_author);
             imageFavorite = itemView.findViewById(R.id.image_favorite);
+            Button buttonDelete = itemView.findViewById(R.id.button_delete);
+            Button buttonReview = itemView.findViewById(R.id.button_review);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,12 +83,34 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
                     }
                 }
             });
+
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onDeleteClick(novels.get(position));
+                    }
+                }
+            });
+
+            buttonReview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onReviewClick(novels.get(position));
+                    }
+                }
+            });
         }
     }
 
     public interface OnItemClickListener {
         void onItemClick(Novel novel);
         void onFavoriteClick(Novel novel);
+        void onDeleteClick(Novel novel);
+        void onReviewClick(Novel novel);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

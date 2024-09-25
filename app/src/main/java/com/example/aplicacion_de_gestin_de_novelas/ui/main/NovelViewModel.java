@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
-import com.example.aplicacion_de_gestin_de_novelas.data.repository.NovelRepository;
+import com.example.aplicacion_de_gestin_de_novelas.data.rep.NovelRepository;
 import java.util.List;
 
 public class NovelViewModel extends AndroidViewModel {

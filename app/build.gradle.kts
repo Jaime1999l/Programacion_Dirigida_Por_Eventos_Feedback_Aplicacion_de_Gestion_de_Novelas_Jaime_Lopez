@@ -35,7 +35,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.room.common)
     implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler) // Cambié a annotationProcessor
+    annotationProcessor(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

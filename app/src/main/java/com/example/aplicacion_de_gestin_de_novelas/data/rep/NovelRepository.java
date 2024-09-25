@@ -1,11 +1,12 @@
-package com.example.aplicacion_de_gestin_de_novelas.data.repository;
+package com.example.aplicacion_de_gestin_de_novelas.data.rep;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.aplicacion_de_gestin_de_novelas.data.database.NovelDao;
-import com.example.aplicacion_de_gestin_de_novelas.data.database.NovelDatabase;
+import com.example.aplicacion_de_gestin_de_novelas.data.dataBase.NovelDataBase;
+import com.example.aplicacion_de_gestin_de_novelas.data.dataBase.NovelDao;
+import com.example.aplicacion_de_gestin_de_novelas.data.dataBase.NovelDataBase;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Review;
 
@@ -19,7 +20,7 @@ public class NovelRepository {
     private final ExecutorService executorService;
 
     public NovelRepository(Application application) {
-        NovelDatabase database = NovelDatabase.getInstance(application);
+        NovelDataBase database = NovelDataBase.getInstance(application);
         novelDao = database.novelDao();
         allNovels = novelDao.getAllNovels();
         executorService = Executors.newFixedThreadPool(2);

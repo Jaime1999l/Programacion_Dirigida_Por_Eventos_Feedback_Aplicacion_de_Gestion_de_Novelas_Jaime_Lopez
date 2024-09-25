@@ -1,5 +1,5 @@
 [versions]
-agp = "8.1.0" # Ajusta la versión del plugin de Android según Gradle
+agp = "8.6.0" # Ajusta la versión del plugin de Android según Gradle
 junit = "4.13.2"
 junitVersion = "1.1.5" # Cambié la versión a una estable para 'androidx.test.ext:junit'
 espressoCore = "3.4.0" # Asegúrate de utilizar una versión estable compatible

@@ -1,5 +1,4 @@
 package com.example.aplicacion_de_gestin_de_novelas.data.model;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,10 +6,10 @@ import androidx.room.PrimaryKey;
 public class Review {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private final int novelId;
-    private final String reviewer;
-    private final String comment;
-    private final int rating;
+    private int novelId;
+    private String reviewer;
+    private String comment;
+    private int rating;
 
     public Review(int novelId, String reviewer, String comment, int rating) {
         this.novelId = novelId;
@@ -29,5 +28,18 @@ public class Review {
 
     public int getNovelId() {
         return novelId;
+    }
 
+    public String getReviewer() {
+        return reviewer;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+}
 

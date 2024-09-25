@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Aplicacion_de_Gestión_de_Novelas</string>
+    <string name="app_name">Aplicacion de Gestion de Novelas</string>
+    <string name="favorite_updated">Favorito actualizado</string>
+    <string name="novel_deleted">Novela eliminada</string>
+    <string name="add_novel">Agregar Novela</string>
+    <string name="delete_novel">Eliminar</string>
+    <string name="review_novel">Reseñas</string>
+    <string name="delete_confirmation">¿Estás seguro de que deseas eliminar esta novela?</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
 </resources>
