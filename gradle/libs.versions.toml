@@ -1,10 +1,11 @@
 [versions]
-agp = "8.6.0"
+agp = "8.1.0" # Ajusta la versión del plugin de Android según Gradle
 junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
-material = "1.12.0"
+junitVersion = "1.1.5" # Cambié la versión a una estable para 'androidx.test.ext:junit'
+espressoCore = "3.4.0" # Asegúrate de utilizar una versión estable compatible
+appcompat = "1.3.0" # Ajusté la versión para evitar posibles conflictos
+material = "1.4.0" # Versión estable y probada de Material
+room = "2.3.0" # Versión de Room estable y probada
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -12,7 +13,9 @@ ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitV
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-common = { group = "androidx.room", name = "room-common", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-
