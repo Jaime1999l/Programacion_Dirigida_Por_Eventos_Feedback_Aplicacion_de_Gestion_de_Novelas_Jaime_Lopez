@@ -14,7 +14,7 @@ import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    private FavoritesAdapter favoritesAdapter; // Cambiado a FavoritesAdapter
+    private FavoritesAdapter favoritesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,11 @@ public class FavoritesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        favoritesAdapter = new FavoritesAdapter(); // Usar FavoritesAdapter
+        favoritesAdapter = new FavoritesAdapter();
         recyclerView.setAdapter(favoritesAdapter);
 
         NovelViewModel novelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
 
-        // Usar la consulta de novelas favoritas
         novelViewModel.getFavoriteNovels().observe(this, new Observer<List<Novel>>() {
             @Override
             public void onChanged(List<Novel> novels) {

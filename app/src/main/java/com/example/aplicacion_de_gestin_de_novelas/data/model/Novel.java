@@ -23,7 +23,7 @@ public class Novel {
     private boolean favorite;
     private String imageUri;
 
-    public Novel(String title, String author, int year, String synopsis, String imageUri) {
+    public Novel(@NonNull String title, @NonNull String author, int year, @NonNull String synopsis, String imageUri) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -35,9 +35,12 @@ public class Novel {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
+    @NonNull
     public String getTitle() { return title; }
+    @NonNull
     public String getAuthor() { return author; }
     public int getYear() { return year; }
+    @NonNull
     public String getSynopsis() { return synopsis; }
     public boolean isFavorite() { return favorite; }
     public void setFavorite(boolean favorite) { this.favorite = favorite; }

@@ -22,22 +22,18 @@ public class AddEditNovelViewModel extends AndroidViewModel {
         repository = new NovelRepository(application);
     }
 
-    // Método para obtener una novela por ID
     public LiveData<Novel> getNovelById(int novelId) {
         return repository.getNovelById(novelId);
     }
 
-    // Devuelve la novela actual
     public LiveData<Novel> getNovel() {
         return novel;
     }
 
-    // Devuelve las reseñas de la novela
     public LiveData<List<Review>> getReviews() {
         return reviews;
     }
 
-    // Guarda la novela en la base de datos
     public void saveNovel(Novel novel) {
         if (novel.getId() == 0) { // Si es una novela nueva
             repository.insert(novel);

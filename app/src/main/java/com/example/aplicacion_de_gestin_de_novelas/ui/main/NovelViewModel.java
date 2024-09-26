@@ -10,13 +10,13 @@ import java.util.List;
 public class NovelViewModel extends AndroidViewModel {
     private final NovelRepository repository;
     private final LiveData<List<Novel>> allNovels;
-    private final LiveData<List<Novel>> favoriteNovels; // Añadir esta línea
+    private final LiveData<List<Novel>> favoriteNovels;
 
     public NovelViewModel(@NonNull Application application) {
         super(application);
         repository = new NovelRepository(application);
         allNovels = repository.getAllNovels();
-        favoriteNovels = repository.getFavoriteNovels(); // Obtener novelas favoritas
+        favoriteNovels = repository.getFavoriteNovels();
     }
 
     public LiveData<List<Novel>> getAllNovels() {
@@ -24,10 +24,9 @@ public class NovelViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Novel>> getFavoriteNovels() {
-        return favoriteNovels; // Retornar novelas favoritas
+        return favoriteNovels;
     }
 
-    // Métodos para insertar, actualizar y eliminar
     public void insert(Novel novel) {
         repository.insert(novel);
     }

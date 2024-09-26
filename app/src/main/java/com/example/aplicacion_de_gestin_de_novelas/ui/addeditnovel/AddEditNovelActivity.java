@@ -23,7 +23,6 @@ import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
 public class AddEditNovelActivity extends AppCompatActivity {
 
     private EditText editTextTitle, editTextAuthor, editTextYear, editTextSynopsis;
-    private Button buttonSave, buttonSelectImage;
     private ImageView imageViewCover;
     private AddEditNovelViewModel novelViewModel;
     private Uri selectedImageUri;
@@ -47,8 +46,8 @@ public class AddEditNovelActivity extends AppCompatActivity {
         editTextAuthor = findViewById(R.id.edit_text_author);
         editTextYear = findViewById(R.id.edit_text_year);
         editTextSynopsis = findViewById(R.id.edit_text_synopsis);
-        buttonSave = findViewById(R.id.button_save);
-        buttonSelectImage = findViewById(R.id.button_select_image);
+        Button buttonSave = findViewById(R.id.button_save);
+        Button buttonSelectImage = findViewById(R.id.button_select_image);
         imageViewCover = findViewById(R.id.image_view_cover);
 
         // Verifica que ViewModel esté correctamente inicializado
