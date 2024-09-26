@@ -17,7 +17,7 @@ La Aplicación de Gestión de Novelas es una herramienta que permite a los usuar
 - Agregar Reseña: Añadir una reseña a una novela, con puntuación y comentario.
 - Ver Reseñas: Muestra todas las reseñas asociadas a una novela específica.
 - Subir Imagen de Portada: Permite al usuario subir una imagen desde su dispositivo como portada de la novela.
-- 
+
 ## Estructura del Proyecto
 Carpetas Principales:
 
