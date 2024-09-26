@@ -1,5 +1,6 @@
 package com.example.aplicacion_de_gestin_de_novelas.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,18 +9,27 @@ public class Novel {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @NonNull
     private String title;
-    private String author;
-    private int year;
-    private String synopsis;
-    private boolean favorite;
 
-    public Novel(String title, String author, int year, String synopsis) {
+    @NonNull
+    private String author;
+
+    private int year;
+
+    @NonNull
+    private String synopsis;
+
+    private boolean favorite;
+    private String imageUri;
+
+    public Novel(String title, String author, int year, String synopsis, String imageUri) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.synopsis = synopsis;
         this.favorite = false;
+        this.imageUri = imageUri;
     }
 
     public int getId() { return id; }
@@ -31,6 +41,12 @@ public class Novel {
     public String getSynopsis() { return synopsis; }
     public boolean isFavorite() { return favorite; }
     public void setFavorite(boolean favorite) { this.favorite = favorite; }
+    public String getImageUri() {
+        return imageUri;
+    }
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
 }
 
 

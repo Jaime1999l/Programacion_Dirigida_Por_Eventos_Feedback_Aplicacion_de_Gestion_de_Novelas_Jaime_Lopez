@@ -1,5 +1,6 @@
 package com.example.aplicacion_de_gestin_de_novelas.ui.main;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,17 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
         Novel currentNovel = novels.get(position);
         holder.textViewTitle.setText(currentNovel.getTitle());
         holder.textViewAuthor.setText(currentNovel.getAuthor());
-        if (currentNovel.isFavorite()) {
-            holder.imageFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+
+        if (currentNovel.getImageUri() != null && !currentNovel.getImageUri().isEmpty()) {
+            holder.imageViewCover.setVisibility(View.VISIBLE);
+            holder.imageViewCover.setImageURI(Uri.parse(currentNovel.getImageUri()));
         } else {
-            holder.imageFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            holder.imageViewCover.setVisibility(View.GONE);
         }
+
+        holder.imageFavorite.setImageResource(
+                currentNovel.isFavorite() ? R.drawable.ic_baseline_favorite_24 : R.drawable.ic_baseline_favorite_border_24
+        );
     }
 
     @Override
@@ -47,22 +54,22 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
         notifyDataSetChanged();
     }
 
-    public Novel getNovelAt(int position) {
-        return novels.get(position);
-    }
-
     class NovelHolder extends RecyclerView.ViewHolder {
         private final TextView textViewTitle;
         private final TextView textViewAuthor;
+        private final ImageView imageViewCover; // Nueva ImageView para la portada
         private final ImageView imageFavorite;
+        private final Button buttonDelete;
+        private final Button buttonReview;
 
         public NovelHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewAuthor = itemView.findViewById(R.id.text_view_author);
+            imageViewCover = itemView.findViewById(R.id.image_view_cover); // Referencia al ImageView
             imageFavorite = itemView.findViewById(R.id.image_favorite);
-            Button buttonDelete = itemView.findViewById(R.id.button_delete);
-            Button buttonReview = itemView.findViewById(R.id.button_review);
+            buttonDelete = itemView.findViewById(R.id.button_delete);
+            buttonReview = itemView.findViewById(R.id.button_review);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,4 +124,3 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
         this.listener = listener;
     }
 }
-

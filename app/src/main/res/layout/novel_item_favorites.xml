@@ -14,14 +14,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/image_view_cover"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:visibility="gone" /> <!-- Se muestra solo si hay imagen -->
-
         <TextView
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
@@ -29,8 +21,7 @@
             android:text="Título de la Novela"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/text_view_author"
@@ -41,31 +32,6 @@
             android:textColor="@color/teal_700"
             android:layout_marginTop="4dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_marginTop="8dp">
-
-            <Button
-                android:id="@+id/button_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/purple_700" />
-
-            <Button
-                android:id="@+id/button_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/review_novel"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/teal_700"/>
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/image_favorite"
             android:layout_width="24dp"
@@ -74,5 +40,6 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_baseline_favorite_border_24"
             android:contentDescription="@string/favorite_updated" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

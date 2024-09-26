@@ -1,20 +1,23 @@
 package com.example.aplicacion_de_gestin_de_novelas;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
 import com.example.aplicacion_de_gestin_de_novelas.ui.addeditnovel.AddEditNovelActivity;
+import com.example.aplicacion_de_gestin_de_novelas.ui.favoritesNovel.FavoritesActivity;
 import com.example.aplicacion_de_gestin_de_novelas.ui.main.NovelAdapter;
 import com.example.aplicacion_de_gestin_de_novelas.ui.main.NovelViewModel;
 import com.example.aplicacion_de_gestin_de_novelas.ui.review.ReviewActivity;
@@ -25,7 +28,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonAddBook;
     private RecyclerView recyclerView;
     private NovelViewModel novelViewModel;
     private NovelAdapter novelAdapter;
@@ -35,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonAddBook = findViewById(R.id.buttonAddBook);
         recyclerView = findViewById(R.id.recyclerView);
+        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(novelAdapter);
 
         novelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
-
         novelViewModel.getAllNovels().observe(this, new Observer<List<Novel>>() {
             @Override
             public void onChanged(List<Novel> novels) {
@@ -52,11 +53,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonAddBook.setOnClickListener(new View.OnClickListener() {
+        buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddEditNovelActivity.class);
-                startActivity(intent);
+                showPopupMenu(v);
             }
         });
 
@@ -74,8 +74,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFavoriteClick(Novel novel) {
-                novelViewModel.update(new Novel(novel.getTitle(), novel.getAuthor(), novel.getYear(), novel.getSynopsis()));
-                Toast.makeText(MainActivity.this, "Favorito actualizado", Toast.LENGTH_SHORT).show();
+                novel.setFavorite(!novel.isFavorite());
+                novelViewModel.update(novel);
+
+                View favoriteIcon = findViewById(R.id.image_favorite);
+                ScaleAnimation scaleAnimation = new ScaleAnimation(
+                        1.0f, 1.2f, 1.0f, 1.2f,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f
+                );
+                scaleAnimation.setDuration(300);
+                scaleAnimation.setRepeatCount(1);
+                scaleAnimation.setRepeatMode(Animation.REVERSE);
+                favoriteIcon.startAnimation(scaleAnimation);
+
+                String message = novel.isFavorite() ? "Añadido a favoritos" : "Eliminado de favoritos";
+                Snackbar.make(recyclerView, message, Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
@@ -84,12 +98,9 @@ public class MainActivity extends AppCompatActivity {
                         .setTitle("Eliminar Novela")
                         .setMessage("¿Estás seguro de que deseas eliminar esta novela?")
                         .setNegativeButton("Cancelar", null)
-                        .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                novelViewModel.delete(novel);
-                                Snackbar.make(recyclerView, "Novela eliminada", Snackbar.LENGTH_LONG).show();
-                            }
+                        .setPositiveButton("Eliminar", (dialogInterface, i) -> {
+                            novelViewModel.delete(novel);
+                            Snackbar.make(recyclerView, "Novela eliminada", Snackbar.LENGTH_LONG).show();
                         }).show();
             }
 
@@ -101,5 +112,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.main_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.action_add_novel) {
+                    Intent intent = new Intent(MainActivity.this, AddEditNovelActivity.class);
+                    startActivity(intent);
+                    return true;
+                } else if (id == R.id.action_view_favorites) {
+                    Intent favoriteIntent = new Intent(MainActivity.this, FavoritesActivity.class);
+                    startActivity(favoriteIntent);
+                    return true;
+                }
+
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
 }
+
 

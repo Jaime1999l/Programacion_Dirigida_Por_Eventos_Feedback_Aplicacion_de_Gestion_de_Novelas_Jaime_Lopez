@@ -1,27 +1,42 @@
 package com.example.aplicacion_de_gestin_de_novelas.ui.addeditnovel;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.aplicacion_de_gestin_de_novelas.R;
 import com.example.aplicacion_de_gestin_de_novelas.data.model.Novel;
-import com.example.aplicacion_de_gestin_de_novelas.data.model.Review;
-
-import java.util.List;
 
 public class AddEditNovelActivity extends AppCompatActivity {
 
     private EditText editTextTitle, editTextAuthor, editTextYear, editTextSynopsis;
-    private Button buttonSave;
-    private AddEditNovelViewModel addEditNovelViewModel;
+    private Button buttonSave, buttonSelectImage;
+    private ImageView imageViewCover;
+    private AddEditNovelViewModel novelViewModel;
+    private Uri selectedImageUri;
+
+    private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    selectedImageUri = result.getData().getData();
+                    imageViewCover.setImageURI(selectedImageUri);
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +48,24 @@ public class AddEditNovelActivity extends AppCompatActivity {
         editTextYear = findViewById(R.id.edit_text_year);
         editTextSynopsis = findViewById(R.id.edit_text_synopsis);
         buttonSave = findViewById(R.id.button_save);
+        buttonSelectImage = findViewById(R.id.button_select_image);
+        imageViewCover = findViewById(R.id.image_view_cover);
 
-        addEditNovelViewModel = new ViewModelProvider(this).get(AddEditNovelViewModel.class);
+        // Verifica que ViewModel esté correctamente inicializado
+        try {
+            novelViewModel = new ViewModelProvider(this).get(AddEditNovelViewModel.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al inicializar el ViewModel: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        // Verifica que los extras se reciban correctamente
         final Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey("EXTRA_ID")) {
             setTitle("Editar Novela");
-            addEditNovelViewModel.setNovelId(extras.getInt("EXTRA_ID"));
-            addEditNovelViewModel.getNovel().observe(this, new Observer<Novel>() {
+            int novelId = extras.getInt("EXTRA_ID");
+            novelViewModel.getNovelById(novelId).observe(this, new Observer<Novel>() {
                 @Override
                 public void onChanged(Novel novel) {
                     if (novel != null) {
@@ -48,6 +73,10 @@ public class AddEditNovelActivity extends AppCompatActivity {
                         editTextAuthor.setText(novel.getAuthor());
                         editTextYear.setText(String.valueOf(novel.getYear()));
                         editTextSynopsis.setText(novel.getSynopsis());
+                        if (novel.getImageUri() != null && !novel.getImageUri().isEmpty()) {
+                            selectedImageUri = Uri.parse(novel.getImageUri());
+                            imageViewCover.setImageURI(selectedImageUri);
+                        }
                     }
                 }
             });
@@ -55,12 +84,24 @@ public class AddEditNovelActivity extends AppCompatActivity {
             setTitle("Agregar Novela");
         }
 
+        buttonSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveNovel();
             }
         });
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryLauncher.launch(intent);
     }
 
     private void saveNovel() {
@@ -75,18 +116,25 @@ public class AddEditNovelActivity extends AppCompatActivity {
         }
 
         int year = Integer.parseInt(yearString);
-        Novel novel = new Novel(title, author, year, synopsis);
+        Novel novel = new Novel(title, author, year, synopsis, selectedImageUri != null ? selectedImageUri.toString() : "");
 
-        if (getIntent().hasExtra("EXTRA_ID")) {
-            novel.setId(getIntent().getIntExtra("EXTRA_ID", -1));
-            addEditNovelViewModel.saveNovel(novel);
-            Toast.makeText(this, "Novela actualizada", Toast.LENGTH_SHORT).show();
-        } else {
-            addEditNovelViewModel.saveNovel(novel);
-            Toast.makeText(this, "Novela agregada", Toast.LENGTH_SHORT).show();
+        try {
+            if (getIntent().hasExtra("EXTRA_ID")) {
+                novel.setId(getIntent().getIntExtra("EXTRA_ID", -1));
+                novelViewModel.saveNovel(novel);
+                Toast.makeText(this, "Novela actualizada", Toast.LENGTH_SHORT).show();
+            } else {
+                novelViewModel.saveNovel(novel);
+                Toast.makeText(this, "Novela agregada", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al guardar la novela: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
         }
 
         finish();
     }
 }
+
 

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.aplicacion_de_gestin_de_novelas">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -25,10 +31,15 @@
             android:name=".ui.addeditnovel.AddEditNovelActivity"
             android:exported="false" />
 
+        <!-- ReviewActivity: Se usa para ver y agregar reseñas -->
         <activity
             android:name=".ui.review.ReviewActivity"
             android:exported="false" />
 
+        <!-- FavoritesActivity: Se usa para ver las novelas favoritas -->
+        <activity
+            android:name=".ui.favoritesNovel.FavoritesActivity"
+            android:exported="false" />
 
     </application>
 

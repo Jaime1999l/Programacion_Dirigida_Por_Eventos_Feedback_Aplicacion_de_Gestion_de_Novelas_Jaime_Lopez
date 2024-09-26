@@ -8,4 +8,8 @@
     <string name="delete_confirmation">¿Estás seguro de que deseas eliminar esta novela?</string>
     <string name="cancel">Cancelar</string>
     <string name="delete">Eliminar</string>
+    <string name="rating">rating</string>
+    <string name="menu_button">Abrir menú de opciones</string>
+    <string name="ver_favoritos">Ver Favoritos</string>
+    <string name="agregar_novela">Agregar Novela</string>
 </resources>

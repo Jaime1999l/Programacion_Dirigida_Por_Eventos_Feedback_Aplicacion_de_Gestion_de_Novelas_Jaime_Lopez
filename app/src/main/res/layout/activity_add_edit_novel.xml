@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,10 @@
         android:hint="Título"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="12dp"
+        android:minHeight="48dp"
+        android:background="@drawable/rounded_edittext" />
 
     <EditText
         android:id="@+id/edit_text_author"
@@ -21,7 +25,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_title"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:minHeight="48dp"
+        android:background="@drawable/rounded_edittext" />
 
     <EditText
         android:id="@+id/edit_text_year"
@@ -32,27 +39,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_author"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:minHeight="48dp"
+        android:background="@drawable/rounded_edittext" />
 
     <EditText
         android:id="@+id/edit_text_synopsis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Sinopsis"
+        android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_year"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:minHeight="48dp"
+        android:background="@drawable/rounded_edittext" />
+
+    <ImageView
+        android:id="@+id/image_view_cover"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_synopsis"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Imagen de portada seleccionada"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/button_select_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Imagen"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_500"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/image_view_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_synopsis"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/teal_700"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/button_select_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

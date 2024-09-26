@@ -1,5 +1,4 @@
 package com.example.aplicacion_de_gestin_de_novelas.ui.main;
-
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,8 +8,8 @@ import com.example.aplicacion_de_gestin_de_novelas.data.rep.NovelRepository;
 import java.util.List;
 
 public class NovelViewModel extends AndroidViewModel {
-    private NovelRepository repository;
-    private LiveData<List<Novel>> allNovels;
+    private final NovelRepository repository;
+    private final LiveData<List<Novel>> allNovels;
 
     public NovelViewModel(@NonNull Application application) {
         super(application);
@@ -34,5 +33,3 @@ public class NovelViewModel extends AndroidViewModel {
         repository.delete(novel);
     }
 }
-
-
