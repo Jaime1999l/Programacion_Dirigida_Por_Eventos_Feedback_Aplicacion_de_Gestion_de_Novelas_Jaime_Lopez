@@ -10,15 +10,15 @@ public class Novel {
     private int id;
 
     @NonNull
-    private String title;
+    private final String title;
 
     @NonNull
-    private String author;
+    private final String author;
 
-    private int year;
+    private final int year;
 
     @NonNull
-    private String synopsis;
+    private final String synopsis;
 
     private boolean favorite;
     private String imageUri;

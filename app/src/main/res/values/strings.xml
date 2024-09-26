@@ -12,4 +12,25 @@
     <string name="menu_button">Abrir menú de opciones</string>
     <string name="ver_favoritos">Ver Favoritos</string>
     <string name="agregar_novela">Agregar Novela</string>
+    <string name="imagen_de_portada_seleccionada">Imagen de portada seleccionada</string>
+    <string name="seleccionar_imagen">Seleccionar Imagen</string>
+    <string name="guardar">Guardar</string>
+    <string name="sinopsis">Sinopsis</string>
+    <string name="a_o_de_publicaci_n">Año de Publicación</string>
+    <string name="autor">Autor</string>
+    <string name="t_tulo">Título</string>
+    <string name="puntuaci_n_1_5">Puntuación [1-5]</string>
+    <string name="comentario">Comentario</string>
+    <string name="nombre">Nombre</string>
+    <string name="agregar_rese_a">Agregar Reseña</string>
+    <string name="t_tulo_de_la_novela">Título de la Novela</string>
+    <string name="autor_">Autor</string>
+    <string name="t_tulo_de_la_novela_">Título de la Novela</string>
+    <string name="autor__">Autor</string>
+    <string name="autor___">Autor</string>
+    <string name="t_tulo_de__la_novela">Título de la Novela</string>
+    <string name="nombre_del_usuario">Nombre del Usuario</string>
+    <string name="comentario__">Comentario</string>
+    <string name="puntuaci_n_5">Puntuación: 5</string>
+    <string name="______t_tulo_de_la_novela">Título de la Novela</string>
 </resources>

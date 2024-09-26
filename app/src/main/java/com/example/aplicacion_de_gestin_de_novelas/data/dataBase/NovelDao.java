@@ -34,4 +34,8 @@ public interface NovelDao {
 
     @Query("SELECT * FROM review_table WHERE novelId = :novelId ORDER BY id DESC")
     LiveData<List<Review>> getReviewsForNovel(int novelId);
+
+    @Query("SELECT * FROM novel_table WHERE favorite = 1 ORDER BY title ASC")
+    LiveData<List<Novel>> getFavoriteNovels();
+
 }

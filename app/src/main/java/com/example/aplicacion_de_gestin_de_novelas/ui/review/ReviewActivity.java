@@ -19,10 +19,8 @@ import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity {
     private ReviewViewModel reviewViewModel;
-    private RecyclerView recyclerView;
     private ReviewAdapter reviewAdapter;
     private EditText editTextReviewer, editTextComment, editTextRating;
-    private Button buttonAddReview;
     private int novelId;
 
     @Override
@@ -33,8 +31,8 @@ public class ReviewActivity extends AppCompatActivity {
         editTextReviewer = findViewById(R.id.edit_text_reviewer);
         editTextComment = findViewById(R.id.edit_text_comment);
         editTextRating = findViewById(R.id.edit_text_rating);
-        buttonAddReview = findViewById(R.id.button_add_review);
-        recyclerView = findViewById(R.id.recycler_view_reviews);
+        Button buttonAddReview = findViewById(R.id.button_add_review);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_reviews);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -68,7 +66,7 @@ public class ReviewActivity extends AppCompatActivity {
         String ratingString = editTextRating.getText().toString().trim();
 
         if (reviewer.isEmpty() || comment.isEmpty() || ratingString.isEmpty()) {
-            Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Complete todos los campos para continuar...", Toast.LENGTH_SHORT).show();
             return;
         }
 

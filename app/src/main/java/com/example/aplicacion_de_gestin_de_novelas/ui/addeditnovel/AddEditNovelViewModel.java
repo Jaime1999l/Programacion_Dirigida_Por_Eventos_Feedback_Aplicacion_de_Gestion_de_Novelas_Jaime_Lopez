@@ -27,12 +27,6 @@ public class AddEditNovelViewModel extends AndroidViewModel {
         return repository.getNovelById(novelId);
     }
 
-    // Método para establecer el ID de la novela en edición
-    public void setNovelId(int novelId) {
-        novel = repository.getNovelById(novelId);
-        reviews = repository.getReviewsForNovel(novelId);
-    }
-
     // Devuelve la novela actual
     public LiveData<Novel> getNovel() {
         return novel;
@@ -50,21 +44,5 @@ public class AddEditNovelViewModel extends AndroidViewModel {
         } else { // Si es una novela existente
             repository.update(novel);
         }
-    }
-
-    // Elimina una novela de la base de datos
-    public void deleteNovel(Novel novel) {
-        repository.delete(novel);
-    }
-
-    // Añade una reseña a la novela
-    public void addReview(Review review) {
-        repository.addReview(review);
-    }
-
-    // Alterna el estado de favorito de la novela
-    public void toggleFavorite(Novel novel) {
-        novel.setFavorite(!novel.isFavorite());
-        repository.update(novel);
     }
 }

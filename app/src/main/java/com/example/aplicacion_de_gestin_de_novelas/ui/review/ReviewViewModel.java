@@ -11,7 +11,7 @@ import com.example.aplicacion_de_gestin_de_novelas.data.rep.NovelRepository;
 import java.util.List;
 
 public class ReviewViewModel extends AndroidViewModel {
-    private NovelRepository repository;
+    private final NovelRepository repository;
 
     public ReviewViewModel(@NonNull Application application) {
         super(application);

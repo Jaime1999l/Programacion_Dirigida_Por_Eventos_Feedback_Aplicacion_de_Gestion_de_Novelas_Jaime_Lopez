@@ -1,5 +1,6 @@
 package com.example.aplicacion_de_gestin_de_novelas.ui.main;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
         return novels.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setNovels(List<Novel> novels) {
         this.novels = novels;
         notifyDataSetChanged();
@@ -59,8 +61,6 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
         private final TextView textViewAuthor;
         private final ImageView imageViewCover; // Nueva ImageView para la portada
         private final ImageView imageFavorite;
-        private final Button buttonDelete;
-        private final Button buttonReview;
 
         public NovelHolder(View itemView) {
             super(itemView);
@@ -68,8 +68,8 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelHolder>
             textViewAuthor = itemView.findViewById(R.id.text_view_author);
             imageViewCover = itemView.findViewById(R.id.image_view_cover); // Referencia al ImageView
             imageFavorite = itemView.findViewById(R.id.image_favorite);
-            buttonDelete = itemView.findViewById(R.id.button_delete);
-            buttonReview = itemView.findViewById(R.id.button_review);
+            Button buttonDelete = itemView.findViewById(R.id.button_delete);
+            Button buttonReview = itemView.findViewById(R.id.button_review);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

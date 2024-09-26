@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey;
 public class Review {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int novelId;
-    private String reviewer;
-    private String comment;
-    private int rating;
+    private final int novelId;
+    private final String reviewer;
+    private final String comment;
+    private final int rating;
 
     public Review(int novelId, String reviewer, String comment, int rating) {
         this.novelId = novelId;

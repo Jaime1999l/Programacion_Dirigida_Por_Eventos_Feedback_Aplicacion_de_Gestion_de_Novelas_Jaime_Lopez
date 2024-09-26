@@ -1,5 +1,6 @@
 package com.example.aplicacion_de_gestin_de_novelas.ui.review;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
         return new ReviewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ReviewHolder holder, int position) {
         Review currentReview = reviews.get(position);
@@ -41,10 +43,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
         notifyDataSetChanged();
     }
 
-    class ReviewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewReviewer;
-        private TextView textViewComment;
-        private TextView textViewRating;
+    static class ReviewHolder extends RecyclerView.ViewHolder {
+        private final TextView textViewReviewer;
+        private final TextView textViewComment;
+        private final TextView textViewRating;
 
         public ReviewHolder(View itemView) {
             super(itemView);

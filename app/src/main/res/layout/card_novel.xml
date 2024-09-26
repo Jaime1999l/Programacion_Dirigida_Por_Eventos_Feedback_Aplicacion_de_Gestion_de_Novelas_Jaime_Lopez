@@ -18,7 +18,7 @@
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título de la Novela"
+            android:text="@string/t_tulo_de_la_novela"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
@@ -27,7 +27,7 @@
             android:id="@+id/text_view_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Autor"
+            android:text="@string/autor_"
             android:textSize="16sp"
             android:textColor="@color/teal_700"
             android:layout_marginTop="4dp" />

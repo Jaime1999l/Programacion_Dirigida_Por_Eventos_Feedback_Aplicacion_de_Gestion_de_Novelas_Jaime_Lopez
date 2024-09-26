@@ -15,15 +15,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NovelRepository {
-    private NovelDao novelDao;
+    private final NovelDao novelDao;
     private LiveData<List<Novel>> allNovels;
     private final ExecutorService executorService;
+    private LiveData<List<Novel>> favoriteNovels;
 
     public NovelRepository(Application application) {
         NovelDataBase database = NovelDataBase.getInstance(application);
         novelDao = database.novelDao();
         allNovels = novelDao.getAllNovels();
         executorService = Executors.newFixedThreadPool(2);
+        favoriteNovels = novelDao.getFavoriteNovels();
     }
 
     public void insert(Novel novel) {
@@ -38,6 +40,9 @@ public class NovelRepository {
         executorService.execute(() -> novelDao.delete(novel));
     }
 
+    public LiveData<List<Novel>> getFavoriteNovels() {
+        return favoriteNovels;
+    }
     public LiveData<List<Novel>> getAllNovels() {
         return allNovels;
     }
