@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aplicacion_de_Gestión_de_Novelas">
 
-        <!-- MainActivity: Necesita android:exported debido al intent-filter -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,17 +25,14 @@
             </intent-filter>
         </activity>
 
-        <!-- AddEditNovelActivity: Si no tiene intent-filter, no requiere android:exported -->
         <activity
             android:name=".ui.addeditnovel.AddEditNovelActivity"
             android:exported="false" />
 
-        <!-- ReviewActivity: Se usa para ver y agregar reseñas -->
         <activity
             android:name=".ui.review.ReviewActivity"
             android:exported="false" />
 
-        <!-- FavoritesActivity: Se usa para ver las novelas favoritas -->
         <activity
             android:name=".ui.favoritesNovel.FavoritesActivity"
             android:exported="false" />
